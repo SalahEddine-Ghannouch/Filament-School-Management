@@ -1,0 +1,63 @@
+<?php
+
+namespace App\Filament\Widgets;
+
+use App\Models\Student;
+use App\Models\Professor;
+use App\Models\Course;
+use App\Models\Club;
+use App\Models\Department;
+use App\Models\ClassSection;
+use Filament\Widgets\StatsOverviewWidget as BaseWidget;
+use Filament\Widgets\StatsOverviewWidget\Stat;
+
+class StatsOverviewWidget extends BaseWidget
+{
+    protected function getStats(): array
+    {
+        return [
+            Stat::make('Total Students', Student::where('status', 'active')->count())
+                ->description('Active students in all levels')
+                ->descriptionIcon('heroicon-m-academic-cap')
+                ->chart([56, 78, 4, 5, 6, 3, 5, 3])
+                ->color('success'),
+
+            Stat::make('Total Professors', Professor::count())
+                ->description('Teaching staff members')
+                ->descriptionIcon('heroicon-m-user-group')
+                ->chart([3, 5, 4, 3, 4, 5, 4, 3])
+                ->color('info'),
+
+            Stat::make('Active Courses', Course::where('status', 'active')->count())
+                ->description('Currently running courses')
+                ->descriptionIcon('heroicon-m-book-open')
+                ->chart([4, 3, 5, 4, 3, 4, 3, 4])
+                ->color('warning'),
+
+            Stat::make('Departments', Department::count())
+                ->description('Academic departments')
+                ->descriptionIcon('heroicon-m-building-office-2')
+                ->chart([2, 3, 2, 3, 2, 3, 2, 3])
+                ->color('danger'),
+
+            Stat::make('Class Sections', ClassSection::where('status', 'active')->count())
+                ->description('Active class sections')
+                ->descriptionIcon('heroicon-m-user-group')
+                ->chart([5, 4, 6, 5, 4, 5, 4, 5])
+                ->color('primary'),
+
+            Stat::make('Student Clubs', Club::where('status', 'active')->count())
+                ->description('Active student clubs')
+                ->descriptionIcon('heroicon-m-user-plus')
+                ->chart([2, 3, 2, 3, 4, 3, 4, 3])
+                ->color('success'),
+
+            Stat::make('Active Students', Student::where('status', 'active')->count())
+                ->description('Currently enrolled')
+                ->descriptionIcon('heroicon-m-check-circle')
+                ->chart([6, 5, 7, 6, 5, 6, 5, 6])
+                ->color('success'),
+                
+        ];
+    }
+} 
